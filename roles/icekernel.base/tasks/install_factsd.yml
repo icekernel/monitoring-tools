@@ -1,0 +1,16 @@
+---
+- name: ensure facts.d
+  file:
+    path: /etc/ansible/facts.d
+    state: directory
+
+- name: stat facts.d roles
+  stat:
+    path: /etc/ansible/facts.d/roles.fact
+  register: factsd_roles
+
+- name: install roles facts.d file
+  copy:
+    dest: /etc/ansible/facts.d/roles.fact
+    src: ../files/roles.fact
+  when: not factsd_roles.stat.exists

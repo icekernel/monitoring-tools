@@ -1,0 +1,12 @@
+[mysql]
+www.dev.example.com
+
+[webservers]
+www.dev.example.com
+
+[dev:children]
+webservers
+mysql
+
+[example:children]
+dev

@@ -1,0 +1,3 @@
+---
+- include: ./install_factsd.yml
+- include: ./register_role.yml

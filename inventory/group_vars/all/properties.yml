@@ -1,0 +1,10 @@
+---
+properties:
+  example:
+    domain: example.com
+    account_username: example
+    account_password: example2015
+  exemplo:
+    domain: exemplo.com
+    account_username: exemplo
+    account_password: exemplo2015

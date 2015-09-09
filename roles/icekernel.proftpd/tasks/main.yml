@@ -1,0 +1,52 @@
+---
+- name: install proftpd packages
+  apt:
+    name: "{{ item }}"
+  with_items:
+    - proftpd
+    - proftpd-mod-mysql
+
+- name: configure proftpd
+  template:
+    src: proftpd.conf.j2
+    dest: "{{ proftpd_conf_path }}"
+  notify: proftpd restart
+
+- name: fix trusty proftpd init script
+  copy:
+    src: ../files/proftpd
+    dest: /etc/init.d/proftpd
+    mode: 0755
+
+- name: load proftpd modules
+  lineinfile:
+    dest: /etc/proftpd/modules.conf
+    regexp: '^#?LoadModule {{ item }}'
+    line: 'LoadModule {{ item }}'
+  with_items:
+    - mod_sql.c
+    - mod_sql_mysql.c
+    - mod_sql_passwd.c
+  notify: proftpd restart
+
+- name: copy proftpd.sql
+  copy:
+    src: ../files/proftpd.sql
+    dest: /tmp/proftpd.sql
+
+- name: create proftpd database
+  mysql_db:
+    name: "{{ proftpd_db }}"
+
+- name: import proftpd database
+  mysql_db:
+    name: "{{ proftpd_db }}"
+    state: import
+    target: /tmp/proftpd.sql
+
+- name: create proftpd database user
+  mysql_user:
+    name: "{{ proftpd_db_username }}"
+    host: "{{ proftpd_db_userhost }}"
+    password: "{{ proftpd_db_password }}"
+    priv: "{{ proftpd_db_priv }}"

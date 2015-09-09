@@ -1,0 +1,7 @@
+---
+rack_environment: dev
+ansible_ssh_user: vagrant
+
+# vagrant external interface
+iface: eth1
+ansible_iface: ansible_{{iface}}

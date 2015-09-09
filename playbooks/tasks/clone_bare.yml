@@ -1,0 +1,32 @@
+---
+- name: clone a bare repo
+  git:
+    bare: yes
+    accept_hostkey: yes
+    depth: 1
+    dest: '{{ item.clone_bare_dest }}'
+    repo: '{{ item.clone_bare_src }}'
+  with_items: clone_bare
+
+- name: ensure git working directory
+  file:
+    path: '{{ item.clone_bare_worktree }}'
+    state: directory
+  with_items: clone_bare
+
+- name: checkout a working tree
+  shell: >
+    git
+    --work-tree={{ item.clone_bare_worktree }}
+    checkout -f
+  args:
+    chdir: '{{ item.clone_bare_dest }}'
+  with_items: clone_bare
+
+- name: ensure correct ownership
+  file:
+    path: '{{ item.clone_bare_worktree }}'
+    recurse: yes
+    owner: '{{ item.clone_bare_worktree_owner }}'
+    group: '{{ item.clone_bare_worktree_group }}'
+  with_items: clone_bare

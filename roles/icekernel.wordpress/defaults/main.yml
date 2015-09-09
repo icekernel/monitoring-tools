@@ -1,0 +1,8 @@
+---
+wordpress_sites:
+  - website_name: www.{{ domain }}
+    wordpress_dir: /home/{{ account_username }}/public_html
+    wordpress_url: http://wordpress.org/latest.tar.gz
+    wordpress_user: "{{ account_username }}"
+    wordpress_passwd: "{{ account_password }}"
+    wordpress_db: "{{ account_username }}"

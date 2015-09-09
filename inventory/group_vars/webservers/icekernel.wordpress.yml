@@ -1,0 +1,14 @@
+---
+wordpress_sites:
+  - website_name: www.{{ properties.example.domain }}
+    wordpress_dir: "/home/{{ properties.example.account_username }}/public_html"
+    wordpress_url: http://wordpress.org/latest.tar.gz
+    wordpress_user: "{{ properties.example.account_username }}"
+    wordpress_passwd: "{{ properties.example.account_password }}"
+    wordpress_db: "{{ properties.example.account_username }}"
+  - website_name: www.{{ properties.exemplo.domain }}
+    wordpress_dir: "/home/{{ properties.exemplo.account_username }}/public_html"
+    wordpress_url: http://wordpress.org/latest.tar.gz
+    wordpress_user: "{{ properties.exemplo.account_username }}"
+    wordpress_passwd: "{{ properties.exemplo.account_password }}"
+    wordpress_db: "{{ properties.exemplo.account_username }}"

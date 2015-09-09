@@ -1,0 +1,30 @@
+---
+- name: ensure virtual user home
+  file:
+    path: /home/{{ item[0].account_username }}/{{ item[1] }}
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: 02775
+  with_nested:
+    - "{{ icekernel_accounts }}"
+    - [ 'log', 'public_html' ]
+
+- name: create proftpd user password
+  shell: python -c 'import base64; import md5; print "{md5}"+base64.b64encode(md5.new("{{ item.account_password }}").digest())'
+  register: password_hash
+  with_items:
+    - "{{ icekernel_accounts }}"
+
+- name: get www-data user id
+  shell: id -u www-data
+  register: user_id
+
+- name: get www-data group id
+  shell: id -u www-data
+  register: group_id
+
+- name: insert user into proftpd_user
+  shell: mysql -u root -proot {{ proftpd_db }} -Bse "INSERT INTO proftpd_user SET userid='{{ item.item.account_username }}', passwd='{{ item.stdout }}', homedir='/home/{{ item.item.account_username }}', uid='{{ user_id.stdout }}', gid='{{ group_id.stdout }}' ON DUPLICATE KEY UPDATE passwd='{{ item.stdout }}', homedir='/home/{{ item.item.account_username }}', uid='{{ user_id.stdout }}', gid='{{ group_id.stdout }}'"
+  with_items:
+    - "{{ password_hash.results }}"

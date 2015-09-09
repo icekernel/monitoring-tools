@@ -1,0 +1,14 @@
+---
+galaxy_info:
+  author: Conrado Buhrer
+  description: base box bootstrapping
+  company: icekernel.com
+  license: BSD
+  min_ansible_version: 1.9
+  platforms:
+  - name: Ubuntu
+    versions:
+    - trusty
+  categories:
+  - system
+dependencies: []

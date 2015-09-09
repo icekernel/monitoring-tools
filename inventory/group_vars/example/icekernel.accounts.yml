@@ -1,0 +1,7 @@
+---
+
+icekernel_accounts:
+  - account_username: "{{ properties.example.account_username }}"
+    account_password: "{{ properties.example.account_password }}"
+  - account_username: "{{ properties.exemplo.account_username }}"
+    account_password: "{{ properties.exemplo.account_password }}"

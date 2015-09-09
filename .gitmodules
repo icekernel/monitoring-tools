@@ -1,0 +1,3 @@
+[submodule "vagrant/boxcutter/ubuntu"]
+	path = vagrant/boxcutter/ubuntu
+	url = git@github.com:boxcutter/ubuntu.git

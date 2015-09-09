@@ -1,0 +1,5 @@
+---
+hostname: "{{ inventory_hostname_short }}"
+
+apt_update_cache: yes
+apt_cache_timeout: 3600

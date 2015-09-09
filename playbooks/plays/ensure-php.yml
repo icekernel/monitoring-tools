@@ -1,0 +1,7 @@
+---
+- name: ensure nginx
+  hosts: webservers
+  sudo: yes
+
+  roles:
+    - { role: geerlingguy.php }

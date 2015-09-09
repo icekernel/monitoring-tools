@@ -1,0 +1,12 @@
+[wordpress]
+localhost
+
+[mysql]
+localhost
+
+[local:children]
+wordpress
+mysql
+
+[example:children]
+local

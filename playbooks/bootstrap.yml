@@ -1,0 +1,10 @@
+---
+- name: bootstrap machines
+  hosts: all
+  sudo: yes
+
+  tasks:
+    - include: ./tasks/ensure_apt_updated.yml
+
+  roles:
+    - { role: icekernel.base }

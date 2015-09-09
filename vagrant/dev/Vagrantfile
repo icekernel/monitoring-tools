@@ -1,0 +1,37 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+sourceDir = "../../share/example.com"
+
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = "icekernel/trusty64"
+  config.vm.box_url = "file://../boxcutter/ubuntu/box/virtualbox/ubuntu1404-nocm.box"
+  config.vm.synced_folder sourceDir, "/vagrant", disabled: true
+
+  # Vbguest Plugin
+  config.vbguest.auto_update = true
+  config.vbguest.no_remote = true # do not download iso
+
+  config.vm.define "example" do |example|
+    example.vm.box = "icekernel/trusty64"
+    example.vm.network :private_network, ip: "10.0.1.2"
+    example.vm.provider "virtualbox" do |v|
+      v.customize ["modifyvm", :id, "--memory", "1024", "--name", "example"]
+    end
+  end
+
+  # VM provisioning
+  config.vm.provision "ansible" do |ansible|
+    inventory_files = File.expand_path("../../inventory/", File.dirname(__FILE__))
+    ansible.playbook = "../../playbooks/bootstrap.yml"
+    ansible.verbose = "vvvv"
+    ansible.groups = {
+      "all:children" => ["dev",]
+    }
+    ansible.inventory_path = "../../inventory/dev"
+    ansible.extra_vars = { inventory_files: inventory_files }
+    #ansible.limit = "dev"
+  end
+end

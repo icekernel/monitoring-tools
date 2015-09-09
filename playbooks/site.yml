@@ -1,0 +1,7 @@
+---
+- include: ./plays/ensure-mysql.yml
+- include: ./plays/ensure-proftpd.yml
+- include: ./plays/ensure-accounts.yml
+- include: ./plays/ensure-nginx.yml
+- include: ./plays/ensure-php.yml
+- include: ./plays/ensure-wordpress.yml

@@ -1,0 +1,30 @@
+---
+nginx_sites:
+  example:
+    - listen 80
+    - server_name {{ properties.example.domain }} www.{{ properties.example.domain }} www.{{ rack_environment }}.{{ properties.example.domain }}
+    - root "/home/{{ properties.example.account_username }}/public_html"
+    - access_log /home/{{ properties.example.account_username }}/log/nginx_access.log
+    - error_log /home/{{ properties.example.account_username }}/log/nginx_error.log
+    - index index.php index.html index.htm
+    - location / { try_files $uri $uri/ /index.php?q=$uri&args; }
+    - error_page 404 /404.html
+    - error_page 500 502 503 504 /50x.html
+    - location = /50x.html { root /usr/share/nginx/html; }
+    - location ~ \.php$ { try_files $uri =404; fastcgi_split_path_info ^(.+\.php)(/.+)$; fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name; fastcgi_pass unix:/var/run/php5-fpm.sock; fastcgi_index index.php; include fastcgi_params; }
+    - client_max_body_size 100m
+  exemplo:
+    - listen 80
+    - server_name {{ properties.exemplo.domain }} www.{{ properties.exemplo.domain }} www.{{ rack_environment }}.{{ properties.exemplo.domain }}
+    - root "/home/{{ properties.exemplo.account_username }}/public_html"
+    - access_log /home/{{ properties.exemplo.account_username }}/log/nginx_access.log
+    - error_log /home/{{ properties.exemplo.account_username }}/log/nginx_error.log
+    - index index.php index.html index.htm
+    - location / { try_files $uri $uri/ /index.php?q=$uri&args; }
+    - error_page 404 /404.html
+    - error_page 500 502 503 504 /50x.html
+    - location = /50x.html { root /usr/share/nginx/html; }
+    - location ~ \.php$ { try_files $uri =404; fastcgi_split_path_info ^(.+\.php)(/.+)$; fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name; fastcgi_pass unix:/var/run/php5-fpm.sock; fastcgi_index index.php; include fastcgi_params; }
+    - client_max_body_size 100m
+
+nginx_official_repo: true

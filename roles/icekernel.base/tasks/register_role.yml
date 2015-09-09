@@ -1,0 +1,22 @@
+---
+- name: stat facts.d roles
+  stat:
+    path: /etc/ansible/facts.d/roles.fact
+  register: factsd_roles
+
+- name: assert facts.d roles.fact (icekernel.base)
+  assert:
+    that:
+      - factsd_roles.stat.exists
+
+- name: set current role fact in facts.d
+  ini_file:
+    backup: yes
+    dest: /etc/ansible/facts.d/roles.fact
+    section: default
+    option: icekernel_base
+    value: icekernel.base
+
+- name: set current role fact in play
+  setup:
+    filter: ansible_local

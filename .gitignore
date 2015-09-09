@@ -1,0 +1,8 @@
+/vagrant/**/.vagrant/
+*.swp
+*.pyc
+Makefile.local
+ansible.log
+/playbooks/**/*hax.yml
+/roles/*
+!/roles/icekernel*

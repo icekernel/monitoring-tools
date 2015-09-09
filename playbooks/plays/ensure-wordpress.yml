@@ -1,0 +1,6 @@
+---
+- name: wordpress
+  hosts: webservers
+  sudo: yes
+  roles:
+    - icekernel.wordpress

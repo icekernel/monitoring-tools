@@ -1,0 +1,51 @@
+---
+- name: create wordpress directory
+  file:
+    state: directory
+    path: "{{ item.wordpress_dir }}"
+    owner: www-data
+    group: www-data
+    mode: 02775
+  with_items:
+    - "{{ wordpress_sites }}"
+
+- name: download the latest wordpress
+  get_url:
+    url: "{{ item.wordpress_url }}"
+    dest: /tmp/latest.tar.gz
+  become_user: www-data
+  with_items:
+    - "{{ wordpress_sites }}"
+
+- name: unzip the downloaded wordpress zipped file
+  shell: tar --strip-components=1 -z -x -f /tmp/latest.tar.gz
+  args:
+    creates: "{{ item.wordpress_dir }}/index.php"
+    chdir: "{{ item.wordpress_dir }}"
+  become_user: www-data
+  with_items:
+    - "{{ wordpress_sites }}"
+
+- name: configure wordpress
+  template:
+    src: wp-config.php.j2
+    dest: "{{ item.wordpress_dir }}/wp-config.php"
+    owner: www-data
+    group: www-data
+  with_items:
+    - "{{ wordpress_sites }}"
+
+- name: set group to www-data recursively
+  shell: find {{ item.wordpress_dir }} -exec chgrp www-data {} \;
+  with_items:
+    - "{{ wordpress_sites }}"
+
+- name: set directories group permissions recursively
+  shell: find {{ item.wordpress_dir }} -type d -exec chmod 2775 {} \;
+  with_items:
+    - "{{ wordpress_sites }}"
+
+- name: set files group permissions recursively
+  shell: find {{ item.wordpress_dir }} -type f -exec chmod 664 {} \;
+  with_items:
+    - "{{ wordpress_sites }}"
