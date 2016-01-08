@@ -39,7 +39,7 @@ In result you should get these tools:
 
 http://monitoring.icekernel.com/icinga 
   - Login `icingaadmin`, 
-  - passwd `icingaadmin`
-http://monitoring.icekernel.com/influx
+  - passwd `icingaadmin`,
+http://monitoring.icekernel.com/influx,
 http://monitoring.icekernel.com/grafana
 
