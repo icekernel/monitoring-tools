@@ -37,9 +37,9 @@ HOSTNAME, DISK_SIZE (In MB), RAM (in MB) you can change to any you want.
 
 In result you should get these tools:
 
-http://monitoring.icekernel.com/icinga 
-  - Login `icingaadmin`, 
-  - passwd `icingaadmin`,
-http://monitoring.icekernel.com/influx,
-http://monitoring.icekernel.com/grafana
+- http://monitoring.icekernel.com/icinga 
+    - Login `icingaadmin`, 
+    - passwd `icingaadmin`
+- http://monitoring.icekernel.com/influx
+- http://monitoring.icekernel.com/grafana
 
