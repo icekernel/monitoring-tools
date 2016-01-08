@@ -1,0 +1,17 @@
+---
+- name: ansible-icinga2-web2-ui
+  hosts: monitoring_servers
+  sudo: yes
+  roles:
+  - role: ansible-icinga2-web2-ui
+    icinga2_web2_db_pass: "icinga"
+    icinga2_ido_mysql_configuration: |
+      library "db_ido_mysql"
+
+      object IdoMysqlConnection "ido-mysql" {
+          user = "{{ icinga2_web2_db_user }}"
+          password = "{{ icinga2_web2_db_pass }}"
+          host = "localhost"
+          database = "{{ icinga2_web2_db }}"
+      }
+    tags: icinga2-ansible-web2-ui

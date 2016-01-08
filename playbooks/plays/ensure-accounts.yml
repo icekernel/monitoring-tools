@@ -1,7 +1,0 @@
----
-- name: ensure accounts
-  hosts: webservers
-  sudo: yes
-
-  roles:
-    - { role: icekernel.accounts }

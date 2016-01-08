@@ -1,6 +1,11 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+#require 'yaml'
+#settings = YAML.load_file 'vagrant.yml'
+#ip_address = settings['define']['ip_address']
+
+
 sourceDir = "../../share/example.com"
 
 VAGRANTFILE_API_VERSION = "2"
@@ -9,7 +14,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "icekernel/trusty64"
   config.vm.box_url = "file://../boxcutter/ubuntu/box/virtualbox/ubuntu1404-nocm.box"
   config.vm.synced_folder sourceDir, "/vagrant", disabled: true
-
+  config.vm.boot_timeout = 1000
   # Vbguest Plugin
   config.vbguest.auto_update = true
   config.vbguest.no_remote = true # do not download iso
@@ -18,7 +23,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     example.vm.box = "icekernel/trusty64"
     example.vm.network :private_network, ip: "10.0.1.2"
     example.vm.provider "virtualbox" do |v|
-      v.customize ["modifyvm", :id, "--memory", "1024", "--name", "example"]
+    example.vm.hostname = ENV['VM_HOSTNAME']
+      v.customize ["modifyvm", :id, "--name", "example", "--memory", ENV['RAM']]
+      v.customize ["createhd","--filename","box.vdi", "--size", ENV['DISK_SIZE']]
     end
   end
 

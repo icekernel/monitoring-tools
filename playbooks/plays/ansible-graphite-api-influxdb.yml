@@ -1,0 +1,6 @@
+---
+- name: ansible-graphite-api-influxdb
+  hosts: monitoring_servers
+  sudo: yes
+  roles:
+    - ansible-graphite-api-influxdb

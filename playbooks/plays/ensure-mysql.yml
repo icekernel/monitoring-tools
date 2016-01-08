@@ -1,6 +1,0 @@
----
-- name: mysql
-  hosts: mysql
-  sudo: yes
-  roles:
-    - geerlingguy.mysql

@@ -1,0 +1,6 @@
+---
+- name: php-fpm
+  hosts: monitoring_servers
+  sudo: yes
+  roles:
+    - ansible-php-fpm

@@ -1,12 +1,7 @@
-[mysql]
-www.dev.example.com
 
-[webservers]
-www.dev.example.com
-
+[monitoring_servers]
+monitoring.icekernel.com
 [dev:children]
-webservers
-mysql
-
+monitoring_servers
 [example:children]
 dev

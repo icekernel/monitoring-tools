@@ -1,0 +1,6 @@
+---
+- name: mysql
+  hosts: monitoring_servers
+  sudo: yes
+  roles:
+    - ansible-mysql

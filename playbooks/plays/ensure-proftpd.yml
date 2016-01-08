@@ -1,6 +1,0 @@
----
-- name: proftpd
-  hosts: webservers
-  sudo: yes
-  roles:
-    - icekernel.proftpd

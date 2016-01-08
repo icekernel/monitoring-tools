@@ -1,0 +1,6 @@
+---
+- name: ansible-grafana
+  hosts: monitoring_servers
+  sudo: yes
+  roles:
+    - ansible-grafana

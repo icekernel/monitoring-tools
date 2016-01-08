@@ -1,6 +1,0 @@
----
-# defaults file for icekernel.accounts
-icekernel_accounts:
-  - account_username: icekernel
-    account_password: whohackme
-    account_publichtml_group: www-data

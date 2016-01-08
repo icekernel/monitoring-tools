@@ -1,0 +1,6 @@
+---
+- name: nginx
+  hosts: monitoring_servers
+  sudo: yes
+  roles:
+    - ansible-nginx

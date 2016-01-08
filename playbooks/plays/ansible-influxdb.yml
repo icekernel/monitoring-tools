@@ -1,0 +1,6 @@
+---
+- name: ansible-influxdb
+  hosts: monitoring_servers
+  sudo: yes
+  roles:
+    - ansible-influxdb
