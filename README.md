@@ -1,24 +1,19 @@
-Example-Ops
+Monitoring-tools
 ===========
 
-This is just an example of a multi-site wordpress installation on a shared host.
+This is set of different monitoring tools which help to monitor your environments
 
 Installation
 ------------
 
 In order to use this platform repository you must follow a few steps:
 
-- clone [this very git repository](https://github.com/icekernel/example-ops/)
-- install aws cli
-- install the platform’s vault password in `~/.ansible/example-vault
-  (`touch ~/.ansible/example-vault` will do for now)
-- install whatever ssh keys you generate and connect to github or servers and
-  `ssh-add` them, for dev rack handy to `ssh-add ./keys/vagrant`
+- clone [this very git repository](https://github.com/icekernel/monitoring-tools)
 - install the following:
   - [packer.io](https://packer.io)
   - [vagrant](https://www.vagrantup.com/)
   - virtualbox: `sudo apt-get install virtualbox`
-  - ansible: `sudo pip install ansible` (yeah globally)
+  - ansible: `sudo pip install ansible`
 
 
 VMs
@@ -28,11 +23,6 @@ We use the [boxcutter](https://github.com/boxcutter) ubuntu vm to build our own
 virtualbox images for use with vagrant. These virtual machines are located in
 the `vagrant/` folder. The virtual machines are used for development and
 testing purposes.
-
-Be sure to add this to `/etc/hosts`
-
-    10.0.1.2 www.dev.example.com
-    10.0.1.2 www.dev.exemplo.com
 
 Features
 --------
