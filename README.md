@@ -9,11 +9,13 @@ Installation
 In order to use this platform repository you must follow a few steps:
 
 - clone [this very git repository](https://github.com/icekernel/monitoring-tools)
+- Make sure you have updated the submodules: git submodule update --init --recursive
 - install the following:
   - [packer.io](https://packer.io)
   - [vagrant](https://www.vagrantup.com/)
   - virtualbox: `sudo apt-get install virtualbox`
   - ansible: `sudo pip install ansible`
+  - vagrant plugin: `vagrant plugin install vagrant-vbguest`
 
 
 VMs
